@@ -1,4 +1,7 @@
-![效果图](https://upload-images.jianshu.io/upload_images/12890819-f3b950acbffb944b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![效果图1.gif](https://upload-images.jianshu.io/upload_images/12890819-226f48af9087c3cf.gif?imageMogr2/auto-orient/strip)
+
+![效果图 2](https://upload-images.jianshu.io/upload_images/12890819-f3b950acbffb944b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 # 前言
 
@@ -44,15 +47,29 @@
 
 文章管理、用户管理、留言等 具体业务需求，都是些常用的逻辑可以实现的，也很简单，这里就不展开讲了。
 
-# 3. 使用
+# 3. 添加富文本编辑器，同样支持 markdown 语法 
+
+添加的编辑器为 [simplemde-markdown-editor](https://github.com/sparksuite/simplemde-markdown-editor)
+
+效果图
+
+
+![效果图1](https://user-images.githubusercontent.com/24362914/49021611-01c45080-f1ce-11e8-988a-8c1064a448de.png)
+
+
+参考的文章为 [react 搭建博客---支持markdown的富文本编辑器](https://segmentfault.com/a/1190000010616632)
+
+
+# 4. 使用
 
 使用详情请查看 [Ant Design Pro ](https://pro.ant.design/docs/getting-started-cn)，因为本项目也是在这个基础之上，按这个规范来构建的。
 
-# 4. 缺点
+
+# 5. 缺点
 
 开发时，程序出错后，修改正确后，webpack 有时不会及时查觉到内容已经更改，从而不能及时编译，要重新运行命令打包。
 
-# 5. 项目地址
+# 6. 项目地址
 
 开源不易，如果觉得该项目不错或者对你有所帮助，欢迎到 github 上给个 star，谢谢。
 
@@ -72,7 +89,7 @@
 - 3. [基于 node + express + mongodb 的 blog-node 项目文档说明](http://biaochenxuying.cn/articleDetail?article_id=5bf8c57185e0f13af26e7d0d)
 - 4. [服务器小白的我,是如何将node+mongodb项目部署在服务器上并进行性能优化的](http://biaochenxuying.cn/articleDetail?article_id=5bfa728bb54f044b4f9da240)
 
-# 6. Build Setup ( 构建安装 )
+# 7. Build Setup ( 构建安装 )
 
 ``` 
 # install dependencies
@@ -87,7 +104,7 @@ npm run build
 
 如果要看完整的效果，是要和后台项目  **[blog-node](https://github.com/biaochenxuying/blog-node)** 一起运行才行的，不然接口请求会失败。
 
-# 7. 最后
+# 8. 最后
 
 对 **全栈开发** 有兴趣的朋友可以扫下方二维码关注我的公众号，我会不定期更新有价值的内容。
 
