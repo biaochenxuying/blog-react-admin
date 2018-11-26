@@ -1,7 +1,69 @@
-@import '~antd/lib/style/themes/default.less';
-@import '~@/utils/utils.less';
 
-.ant-table-thead > tr > th,
-.ant-table-tbody > tr > td {
-	padding: 16px 5px;
+
+// .editor-toolbar.fullscreen {
+//     z-index: 99;
+// }
+// .CodeMirror-fullscreen {
+//     z-index: 90;
+// }
+// .editor-preview-side {
+//     z-index: 99;
+// }
+
+/*对 markdown 样式的补充*/
+pre {
+    display: block;
+    padding: 10px;
+    margin: 0 0 10px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #abb2bf;
+    background: #282c34;
+    word-break: break-all;
+    word-wrap: break-word;
+    overflow: auto;
 }
+.editor-preview pre, .editor-preview-side pre{
+    background: #282c34;
+}
+h1,h2,h3,h4,h5,h6{
+    margin-top: 1em;
+    /* margin-bottom: 1em; */
+}
+strong {
+    font-weight: bold;
+}
+
+p > code:not([class]) {
+    padding: 2px 4px;
+    font-size: 90%;
+    color: #c7254e;
+    background-color: #f9f2f4;
+    border-radius: 4px;
+}
+p img{
+    /* 图片居中 */
+    margin: 0 auto;
+    display: flex;
+}
+
+.editor-preview-side {
+    font-family: "Microsoft YaHei",  'sans-serif';
+    font-size: 16px;
+    line-height: 30px;
+}
+
+.editor-preview-side .desc ul,.editor-preview-side .desc ol {
+    color: #333333;
+    margin: 1.5em 0 0 25px;
+}
+
+.editor-preview-side .desc h1, .editor-preview-side .desc h2 {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.editor-preview-side .desc a {
+    color: #009a61;
+}
+

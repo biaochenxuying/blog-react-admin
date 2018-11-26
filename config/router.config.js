@@ -54,6 +54,11 @@ export default [
             name: 'list',
             component: './Article/List',
           },
+          {
+            path: '/article/create',
+            name: 'create',
+            component: './Article/ArticleCreate',
+          },
         ],
       },
       {

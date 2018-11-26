@@ -17,8 +17,6 @@ import {
   Avatar,
 } from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
-
-import './style.less';
 import ArticleComponent from './ArticleComponent';
 
 const FormItem = Form.Item;
@@ -55,6 +53,7 @@ class TableList extends PureComponent {
       columns: [
         {
           title: '标题',
+          width: '250',
           dataIndex: 'title',
         },
         {
@@ -63,6 +62,7 @@ class TableList extends PureComponent {
         },
         {
           title: '关键字',
+          width: '200',
           dataIndex: 'keyword',
           render: arr => (
             <span>
@@ -150,6 +150,7 @@ class TableList extends PureComponent {
         },
         {
           title: '操作',
+          width: '300',
           render: (text, record) => (
             <div>
               <Fragment>
@@ -194,6 +195,31 @@ class TableList extends PureComponent {
   handleSubmit() {
     const { dispatch } = this.props;
     const { articleDetail } = this.props.article;
+    if(!this.state.title){
+			notification.error({
+				message: "文章标题不能为空",
+			});
+			return
+		}
+		if(!this.state.keyword){
+			notification.error({
+				message: "文章关键字不能为空",
+			});
+			return
+		}
+		if(!this.state.content){
+			notification.error({
+				message: "文章内容不能为空",
+			});
+			return
+		}
+		if (keyword instanceof Array) {
+			keyword = keyword.join(',');
+		}
+		this.setState({
+			loading: true,
+    });
+    
     let keyword = this.state.keyword;
     if (keyword instanceof Array) {
       keyword = keyword.join(',');
@@ -626,6 +652,7 @@ class TableList extends PureComponent {
             />
           </div>
         </Card>
+              
         <ArticleComponent
           changeType={this.state.changeType}
           title={this.state.title}
