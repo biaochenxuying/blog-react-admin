@@ -16,7 +16,7 @@ export default {
     *loginAdmin({ payload }, { call, put }) {
       const response = yield call(loginAdmin, payload);
       if (response.code === 0) {
-        response.currentAuthority = response.data.name || 'admin';
+        response.currentAuthority = 'admin';
         response.status = 'ok';
         response.type = 'account';
         yield put({
@@ -30,7 +30,6 @@ export default {
         reloadAuthorized();
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
-        console.log('params :', params);
         let { redirect } = params;
         if (redirect) {
           const redirectUrlParams = new URL(redirect);
@@ -45,7 +44,6 @@ export default {
           }
         }
         console.log('redirect :', redirect);
-
         yield put(routerRedux.replace(redirect || '/dashboard/workplace'));
       }
     },
