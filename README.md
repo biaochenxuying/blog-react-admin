@@ -149,11 +149,13 @@ http://127.0.0.1:3000/register
 ## 8.3 权限
 
 注册了管理员账号，并用管理员账号登录，还不能正常登录管理后台的，会被重定向加登录页面。因为权限管理的限制，要把自己注册的管理员账号的 **名字** 加在 config/router.config.js 的 authority 里面。
+
 详情请看：
+
 
 ```
 https://pro.ant.design/docs/authority-management-cn
-``
+```
 
 # 9. 最后
 
