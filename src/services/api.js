@@ -120,7 +120,6 @@ export async function addReplyMessage(params) {
   });
 }
 
-
 // 文章
 export async function queryArticle(params) {
   return request(`/api/getArticleListAdmin?${stringify(params)}`);
@@ -153,6 +152,21 @@ export async function getArticleDetail(params) {
   });
 }
 
+// 管理一级评论
+export async function changeComment(params) {
+  return request('/api/changeComment', {
+    method: 'POST',
+    body: params,
+  });
+}
+
+// 管理第三者评论
+export async function changeThirdComment(params) {
+  return request('/api/changeThirdComment', {
+    method: 'POST',
+    body: params,
+  });
+}
 
 // 时间轴
 export async function queryTimeAxis(params) {
@@ -186,7 +200,6 @@ export async function getTimeAxisDetail(params) {
   });
 }
 
-
 // 标签
 export async function queryTag(params) {
   return request(`/api/getTagList?${stringify(params)}`);
@@ -205,7 +218,6 @@ export async function delTag(params) {
     body: params,
   });
 }
-
 
 export async function queryBasicProfile() {
   return request('/api/profile/basic');

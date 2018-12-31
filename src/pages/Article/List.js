@@ -1,6 +1,7 @@
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
 import moment from 'moment';
+import domain from '@/utils/domain.js';
 import {
   Row,
   Col,
@@ -18,6 +19,7 @@ import {
 } from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import ArticleComponent from './ArticleComponent';
+import CommentsComponent from './CommentsComponent';
 
 const FormItem = Form.Item;
 
@@ -47,22 +49,25 @@ class TableList extends PureComponent {
       searchState: '', // 文章发布状态 => 0 草稿，1 已发布,'' 代表所有文章
       searchKeyword: '',
       visible: false,
+      article_id: '',
+      commentsVisible: false,
       loading: false,
       pageNum: 1,
       pageSize: 10,
       columns: [
         {
           title: '标题',
-          width: '250',
+          width: 120,
           dataIndex: 'title',
         },
         {
           title: '作者',
+          width: 80,
           dataIndex: 'author',
         },
         {
           title: '关键字',
-          width: '200',
+          width: 80,
           dataIndex: 'keyword',
           render: arr => (
             <span>
@@ -76,12 +81,14 @@ class TableList extends PureComponent {
         },
         {
           title: '封面图',
+          width: 50,
           dataIndex: 'img_url',
-          render: val => <Avatar shape="square" src={val} size={64} icon="user" />,
+          render: val => <Avatar shape="square" src={val} size={40} icon="user" />,
         },
         {
           title: '标签',
           dataIndex: 'tags',
+          width: 60,
           render: arr => (
             <span>
               {arr.map(item => (
@@ -95,6 +102,7 @@ class TableList extends PureComponent {
         {
           title: '分类',
           dataIndex: 'category',
+          width: 70,
           render: arr => (
             <span>
               {arr.map(item => (
@@ -108,6 +116,7 @@ class TableList extends PureComponent {
         {
           title: '状态',
           dataIndex: 'state',
+          width: 70,
           render: val => {
             // 文章发布状态 => 0 草稿，1 已发布
             if (val === 0) {
@@ -119,18 +128,39 @@ class TableList extends PureComponent {
           },
         },
         {
+          title: '评论是否处理过',
+          dataIndex: 'comments',
+          width: 50,
+          render: comments => {
+            // console.log('comments',comments)
+            let flag = 1;
+            let length = comments.length;
+            if (length) {
+              for (let i = 0; i < length; i++) {
+                flag = comments[i].is_handle;
+              }
+            }
+            // 新添加的评论 是否已经处理过 => 1 是 / 2 否
+            if (flag === 2) {
+              return <Tag color="red">否</Tag>;
+            }
+            return <Tag color="green">是</Tag>;
+          },
+        },
+        {
           title: '观看/点赞/评论',
+          width: 120,
           dataIndex: 'meta',
           render: val => (
             <div>
-              {' '}
-              <span>{val.views}</span> <span>{val.likes}</span> <span>{val.comments}</span>{' '}
+              <span>{val.views}</span> | <span>{val.likes}</span> | <span>{val.comments}</span>
             </div>
           ),
         },
         {
           title: '原创状态',
           dataIndex: 'origin',
+          width: 50,
           render: val => {
             // 文章转载状态 => 0 原创，1 转载，2 混合
             if (val === 0) {
@@ -150,11 +180,21 @@ class TableList extends PureComponent {
         },
         {
           title: '操作',
-          width: '300',
+          width: 220,
           render: (text, record) => (
             <div>
               <Fragment>
                 <a onClick={() => this.showModal(record)}>修改</a>
+              </Fragment>
+              <Divider type="vertical" />
+              <Fragment>
+                <a onClick={() => this.showCommentModal(record)}>评论</a>
+              </Fragment>
+              <Divider type="vertical" />
+              <Fragment>
+                <a href={`${domain}articleDetail?article_id=${record._id}`} target="_blank">
+                  详情
+                </a>
               </Fragment>
               <Divider type="vertical" />
               <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(text, record)}>
@@ -170,10 +210,13 @@ class TableList extends PureComponent {
     this.handleOk = this.handleOk.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.showModal = this.showModal.bind(this);
+    this.showCommentModal = this.showCommentModal.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+    this.handleCommentsCancel = this.handleCommentsCancel.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.handleChangeSearchState = this.handleChangeSearchState.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.getArticleDetail = this.getArticleDetail.bind(this);
 
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeContent = this.handleChangeContent.bind(this);
@@ -195,31 +238,31 @@ class TableList extends PureComponent {
   handleSubmit() {
     const { dispatch } = this.props;
     const { articleDetail } = this.props.article;
-    if(!this.state.title){
-			notification.error({
-				message: "文章标题不能为空",
-			});
-			return
-		}
-		if(!this.state.keyword){
-			notification.error({
-				message: "文章关键字不能为空",
-			});
-			return
-		}
-		if(!this.state.content){
-			notification.error({
-				message: "文章内容不能为空",
-			});
-			return
-		}
-		if (keyword instanceof Array) {
-			keyword = keyword.join(',');
-		}
-		this.setState({
-			loading: true,
+    if (!this.state.title) {
+      notification.error({
+        message: '文章标题不能为空',
+      });
+      return;
+    }
+    if (!this.state.keyword) {
+      notification.error({
+        message: '文章关键字不能为空',
+      });
+      return;
+    }
+    if (!this.state.content) {
+      notification.error({
+        message: '文章内容不能为空',
+      });
+      return;
+    }
+    if (keyword instanceof Array) {
+      keyword = keyword.join(',');
+    }
+    this.setState({
+      loading: true,
     });
-    
+
     let keyword = this.state.keyword;
     if (keyword instanceof Array) {
       keyword = keyword.join(',');
@@ -419,11 +462,51 @@ class TableList extends PureComponent {
     );
   }
 
+  getArticleDetail(callback) {
+    const { dispatch } = this.props;
+    const params = {
+      id: this.state.article_id,
+      filter: 2, // 文章的评论过滤 => 1: 过滤，2: 不过滤
+    };
+    new Promise(resolve => {
+      dispatch({
+        type: 'article/getArticleDetail',
+        payload: {
+          resolve,
+          params,
+        },
+      });
+    }).then(res => {
+      callback ? callback() : null;
+      // console.log('callback',callback)
+    });
+  }
+
+  showCommentModal = record => {
+    console.log('record._id:', record._id);
+    if (!record._id) {
+      return;
+    }
+    this.setState(
+      {
+        article_id: record._id,
+      },
+      () => {
+        this.getArticleDetail(e => {
+          this.setState({
+            commentsVisible: true,
+          });
+        });
+      }
+    );
+  };
+
   showModal = record => {
     if (record._id) {
       const { dispatch } = this.props;
       const params = {
         id: record._id,
+        filter: 2, // 文章的评论过滤 => 1: 过滤，2: 不过滤
       };
       new Promise(resolve => {
         dispatch({
@@ -502,6 +585,11 @@ class TableList extends PureComponent {
   handleCancel = e => {
     this.setState({
       visible: false,
+    });
+  };
+  handleCommentsCancel = e => {
+    this.setState({
+      commentsVisible: false,
     });
   };
 
@@ -642,6 +730,7 @@ class TableList extends PureComponent {
           <div className="">
             <div className="">{this.renderSimpleForm()}</div>
             <Table
+              size="middle"
               pagination={pagination}
               loading={this.state.loading}
               pagination={pagination}
@@ -652,7 +741,13 @@ class TableList extends PureComponent {
             />
           </div>
         </Card>
-              
+
+        <CommentsComponent
+          commentsVisible={this.state.commentsVisible}
+          handleCommentsCancel={this.handleCommentsCancel}
+          getArticleDetail={this.getArticleDetail}
+        />
+
         <ArticleComponent
           changeType={this.state.changeType}
           title={this.state.title}
