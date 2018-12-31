@@ -1,7 +1,11 @@
 
 ![效果图1.gif](https://upload-images.jianshu.io/upload_images/12890819-226f48af9087c3cf.gif?imageMogr2/auto-orient/strip)
 
-![效果图 2](https://upload-images.jianshu.io/upload_images/12890819-f3b950acbffb944b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![文章列表效果](https://upload-images.jianshu.io/upload_images/12890819-470c8996b8ebdfaf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+![评论审核效果](https://upload-images.jianshu.io/upload_images/12890819-80ae92fc0e493805.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 
 # 前言
 
