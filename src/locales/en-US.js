@@ -77,6 +77,8 @@ export default {
   'menu.article.create': 'create',
   'menu.timeAxis': 'timeAxis',
   'menu.timeAxis.list': 'list',
+  'menu.project': 'project',
+  'menu.project.list': 'list',
   'menu.tag': 'tag',
   'menu.tag.list': 'list',
   'menu.otherUser': 'user',

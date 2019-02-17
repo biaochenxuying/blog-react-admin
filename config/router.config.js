@@ -122,6 +122,18 @@ export default [
         ],
       },
       {
+        path: '/project',
+        name: 'project',
+        icon: 'clock-circle',
+        routes: [
+          {
+            path: '/project/list',
+            name: 'list',
+            component: './Project/List',
+          },
+        ],
+      },
+      {
         name: 'exception',
         icon: 'warning',
         path: '/exception',
