@@ -26,10 +26,10 @@
 - [x] 时间轴管理
 - [x] 富文本编辑器（支持 MarkDown 语法）
 - [x] 项目展示
+- [x] 评论管理
 
 ## 1.2 待实现功能
 
-- [ ] 评论管理
 - [ ] 个人中心（用来设置博主的各种信息）
 - [ ] 工作台（ 接入百度统计接口，查看网站浏览量和用户访问等数据 ）
 
@@ -74,6 +74,8 @@
 # 5. 缺点
 
 开发时，程序出错后，修改正确后，webpack 有时不会及时查觉到内容已经更改，从而不能及时编译，要重新运行命令打包。
+
+笔者的文章里面的图片都是上传到简书上的，创建文章时，只是写个图片链接而已，你们也可以上传到简书或者七牛云，或者其他第三方。
 
 # 6. 项目地址
 
@@ -166,17 +168,13 @@ https://pro.ant.design/docs/authority-management-cn
 # 9. 最后
 
 
-鉴于问问题的人有点多，小汪时间有限，处理不过来，大家可以加入 QQ 群：**186045338**，加群暗号：**全栈修炼** ，一起相互交流学习。
+鉴于问问题的人有点多，笔者时间有限，处理不过来，大家可以加入 QQ 群：**186045338**，加群暗号：**全栈修炼** ，一起相互交流学习。
 
+如果您觉得本项目和文章不错或者对你有所帮助，请给个星呗，你的肯定就是我继续创作的最大动力。
 
-对 **全栈开发** 有兴趣的朋友可以扫下方二维码关注我的公众号，我会不定期更新有价值的内容。
+欢迎关注公众号，并回复 **福利** 可领取免费学习资料，福利详情请猛戳：  [免费资源获取--Python、Java、Linux、Go、node、vue、react、javaScript](https://mp.weixin.qq.com/s?__biz=MzA4MDU1MDExMg==&mid=2247483711&idx=1&sn=1ffb576159805e92fc57f5f1120fce3a&chksm=9fa3c0b0a8d449a664f36f6fdd017ac7da71b6a71c90261b06b4ea69b42359255f02d0ffe7b3&token=1560489745&lang=zh_CN#rd)
 
-关注公众号并回复 **福利** 便免费送你视频资源，绝对干货。
-
-福利详情请点击：  [免费资源分享--Python、Java、Linux、Go、node、vue、react、javaScript](https://mp.weixin.qq.com/s?__biz=MzA4MDU1MDExMg==&mid=2247483711&idx=1&sn=1ffb576159805e92fc57f5f1120fce3a&chksm=9fa3c0b0a8d449a664f36f6fdd017ac7da71b6a71c90261b06b4ea69b42359255f02d0ffe7b3&token=1560489745&lang=zh_CN#rd)
-
-![BiaoChenXuYing](https://upload-images.jianshu.io/upload_images/12890819-091ccce387e2ea34.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
+![BiaoChenXuYing](https://upload-images.jianshu.io/upload_images/12890819-0fc16a9e50276521.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
 
